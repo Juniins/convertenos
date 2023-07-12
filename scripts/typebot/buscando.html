@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #loading {
+      display: block;
+      margin: 0;
+    }
+
+    #content {
+      display: none;
+    }
+  </style>
+  <script>
+    function showContent() {
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("content").style.display = "block";
+    }
+
+    setTimeout(showContent, 5000);
+  </script>
+</head>
+<body>
+  <img id="loading" src="./Assets/loading.gif" alt="Loading" />
+  <div id="content">
+    <object data="./Assets/confere.html" width="100%" height="100%"></object>
+  </div>
+</body>
+</html>
