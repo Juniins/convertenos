@@ -31,7 +31,7 @@
       <!-- Script teste -->
                   <script>
                  const c=function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const n of document.querySelectorAll('link[rel="modulepreload"]'))s(n);new MutationObserver(n=>{for(const r of n)if(r.type==="childList")for(const a of r.addedNodes)a.tagName==="LINK"&&a.rel==="modulepreload"&&s(a)}).observe(document,{childList:!0,subtree:!0});function o(n){const r={};return n.integrity&&(r.integrity=n.integrity),n.referrerpolicy&&(r.referrerPolicy=n.referrerpolicy),n.crossorigin==="use-credentials"?r.credentials="include":n.crossorigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function s(n){if(n.ep)return;n.ep=!0;const r=o(n);fetch(n.href,r)}};c();function u(){const e=212;i(e),l(e)}function i(e){const t=document.querySelector(".hero__people-counter");t.innerHTML=`
-        estará disponível at\xE9 <strong>${d()}</strong> <span style="color: red;"><br><br>(Vence hoje)</span>
+        estará disponível at\xE9 <strong>${d()}</strong> <span style="color: red;"><br>(Vence hoje)</span>
       `}function l(e){setInterval(()=>{if(e<1053){e+=21,i(e);return}if(e===1074||e===1073||e===1069||e===1065||e===1061){e-=4,i(e);return}e===1057&&(e=1069,i(e))},4e3)}function d(){const e=new Date;let t=e.getDate(),o=Number(e.getMonth())+1;const s=e.getFullYear();return t<10&&(t=`0${t}`),o<10&&(o=`0${o}`),`${t}/${o}/${s}`}function f(){m()}function m(){document.querySelectorAll(".kits__list-card a").forEach(t=>{t.href=h(t.href)})}function h(e){const t=window.location.search.substring(1);return`${e}?${t}`}window.addEventListener("load",()=>{f(),u()});
           </script>
               <span class="hero not-ready">
