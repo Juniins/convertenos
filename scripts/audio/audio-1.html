@@ -98,20 +98,20 @@
     document.addEventListener('DOMContentLoaded', function() {
       const player = new Plyr('.plyr', {
         controls: ['play', 'progress', 'duration'],
-        displayDuration: false,
-        displayCurrentTime: true
+        displayDuration: true,
+        displayCurrentTime: false
       });
 
       player.on('play', function(event) {
-        const { currentTimeDisplay, durationDisplay } = player.elements;
-        currentTimeDisplay.style.display = 'none';
-        durationDisplay.style.display = 'block';
+        const { currentTimeContainer, durationContainer } = player.elements;
+        currentTimeContainer.style.display = 'none';
+        durationContainer.style.display = 'block';
       });
 
       player.on('pause', function(event) {
-        const { currentTimeDisplay, durationDisplay } = player.elements;
-        currentTimeDisplay.style.display = 'block';
-        durationDisplay.style.display = 'none';
+        const { currentTimeContainer, durationContainer } = player.elements;
+        currentTimeContainer.style.display = 'block';
+        durationContainer.style.display = 'none';
       });
     });
   </script>
