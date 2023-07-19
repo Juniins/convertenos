@@ -97,20 +97,9 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const player = new Plyr('.plyr', {
-        controls: ['play', 'progress', 'current-time', 'duration']
-      });
-
-      const currentTimeControl = document.querySelector('.plyr__controls .plyr__time--current');
-      const durationControl = document.querySelector('.plyr__controls .plyr__time--duration');
-
-      player.on('timeupdate', function(event) {
-        if (player.playing) {
-          currentTimeControl.classList.remove('hide');
-          durationControl.classList.add('hide');
-        } else {
-          currentTimeControl.classList.add('hide');
-          durationControl.classList.remove('hide');
-        }
+        controls: ['play', 'progress', 'duration'],
+        displayDuration: true,
+        displayCurrentTime: false
       });
     });
   </script>
