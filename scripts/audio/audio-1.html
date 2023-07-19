@@ -97,9 +97,8 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const player = new Plyr('.plyr', {
-        controls: ['play', 'progress', 'duration'],
-        displayDuration: false,
-        displayCurrentTime: true
+        controls: ['play', 'progress', 'current-time'],
+        displayDuration: false
       });
 
       player.on('play', function(event) {
