@@ -18,7 +18,6 @@
       display: flex;
       align-items: center;
       font-family: 'Open Sans', sans-serif;
-      
     }
 
     .audio-container img {
@@ -53,32 +52,34 @@
     color: #4a5464;
     color: var(--plyr-audio-control-color,#4a5464);
     margin-left: 0px;
-}
+    }
 
     .plyr--audio .plyr__control--overlaid .plyr__control__icon {
       font-size: 33px;
     }
 
     .plyr--full-ui input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    background: #797979;
-    background: var(--plyr-range-thumb-background,#797979);
-    border: 0;
-    border-radius: 100%;
-    box-shadow: 0 1px 1px rgba(35,40,47,.15),0 0 0 1px rgba(35,40,47,.2);
-    box-shadow: var(--plyr-range-thumb-shadow,0 1px 1px rgba(35,40,47,.15),0 0 0 1px rgba(35,40,47,.2));
-    height: 13px;
-    height: var(--plyr-range-thumb-height,13px);
-    margin-top: -4px;
-    margin-top: calc(var(--plyr-range-thumb-height,13px)/2*-1 - var(--plyr-range-track-height,5px)/2*-1);
-    position: relative;
-    -webkit-transition: all .2s ease;
-    transition: all .2s ease;
-    width: 13px;
-    width: var(--plyr-range-thumb-height,13px)
-}    
+      -webkit-appearance: none;
+      background: #797979;
+      background: var(--plyr-range-thumb-background,#797979);
+      border: 0;
+      border-radius: 100%;
+      box-shadow: 0 1px 1px rgba(35,40,47,.15),0 0 0 1px rgba(35,40,47,.2);
+      box-shadow: var(--plyr-range-thumb-shadow,0 1px 1px rgba(35,40,47,.15),0 0 0 1px rgba(35,40,47,.2));
+      height: 13px;
+      height: var(--plyr-range-thumb-height,13px);
+      margin-top: -4px;
+      margin-top: calc(var(--plyr-range-thumb-height,13px)/2*-1 - var(--plyr-range-track-height,5px)/2*-1);
+      position: relative;
+      -webkit-transition: all .2s ease;
+      transition: all .2s ease;
+      width: 13px;
+      width: var(--plyr-range-thumb-height,13px)
+    }    
 
-
+    .hide {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -92,37 +93,21 @@
   
   <script src="https://cdn.plyr.io/3.6.7/plyr.js"></script>
   <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const player = new Plyr('.plyr', {
-    controls: ['play', 'progress', 'current']
-  });
+    document.addEventListener('DOMContentLoaded', function() {
+      const player = new Plyr('.plyr', {
+        controls: ['play', 'progress', 'current', 'duration']
+      });
 
-  // Obtém o elemento que exibe o tempo decorrido
-  const currentTimeElement = player.elements.currentTime;
+      const playButton = document.querySelector('.plyr__play-large');
 
-  // Obtém a duração total do áudio
-  const duration = player.duration;
-
-  // Função para atualizar o tempo decorrido invertido
-  function updateReverseCurrentTime() {
-    // Calcula o tempo decorrido invertido
-    const reverseCurrentTime = duration - player.currentTime;
-
-    // Atualiza o elemento com o tempo decorrido invertido
-    currentTimeElement.textContent = formatTime(reverseCurrentTime);
-  }
-
-  // Formata o tempo no formato '00:00'
-  function formatTime(time) {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-  }
-
-  // Adiciona um evento de atualização do tempo decorrido
-  player.on('timeupdate', updateReverseCurrentTime);
-});
-
+      playButton.addEventListener('click', function() {
+        const currentControl = document.querySelector('.plyr__controls .plyr__time--current');
+        const durationControl = document.querySelector('.plyr__controls .plyr__time--duration');
+        
+        currentControl.classList.add('hide');
+        durationControl.classList.remove('hide');
+      });
+    });
   </script>
 </body>
 </html>
