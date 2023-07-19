@@ -18,7 +18,6 @@
       display: flex;
       align-items: center;
       font-family: 'Open Sans', sans-serif;
-      
     }
 
     .audio-container img {
@@ -78,10 +77,28 @@
     width: var(--plyr-range-thumb-height,13px)
 }  
   
-.hide {
+    .hide {
       display: none;
     }
 
+    .plyr__controls .plyr__controls__item.plyr__progress__container:first-child,
+    .plyr__controls .plyr__controls__item.plyr__time+.plyr__time,
+    .plyr__controls .plyr__controls__item.plyr__time:first-child {
+      padding-left: 0;
+      display: block;
+      margin-left: 7.5px;
+    }
+
+    .plyr__time+.plyr__time:before {
+    content: "";
+    margin-right: var(--plyr-control-spacing);
+}
+
+    /* Regra específica para ocultar os controles de tempo */
+    .plyr--audio .plyr__controls .plyr__controls__item.plyr__time--current.hide,
+    .plyr--audio .plyr__controls .plyr__controls__item.plyr__time--duration.hide {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -100,18 +117,20 @@
         controls: ['play', 'progress', 'current-time', 'duration']
       });
 
-      const { currentTimeContainer, durationContainer } = player.elements;
-      currentTimeContainer.style.display = 'none';
-      durationContainer.style.display = 'inline-block';
+      const audioElement = document.querySelector('.plyr');
+      const currentTimeElement = document.querySelector('.plyr__time--current');
+      const durationElement = document.querySelector('.plyr__time--duration');
 
-      player.on('play', function(event) {
-        currentTimeContainer.style.display = 'inline-block';
-        durationContainer.style.display = 'none';
+      currentTimeElement.classList.add('hide'); // Adiciona a classe 'hide' ao iniciar
+
+      audioElement.addEventListener('play', function() {
+        currentTimeElement.classList.remove('hide');
+        durationElement.classList.add('hide');
       });
 
-      player.on('pause', function(event) {
-        currentTimeContainer.style.display = 'none';
-        durationContainer.style.display = 'inline-block';
+      audioElement.addEventListener('pause', function() {
+        currentTimeElement.classList.add('hide');
+        durationElement.classList.remove('hide');
       });
     });
   </script>
