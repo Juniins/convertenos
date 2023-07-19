@@ -92,11 +92,37 @@
   
   <script src="https://cdn.plyr.io/3.6.7/plyr.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const player = new Plyr('.plyr', {
-        controls: ['play', 'progress', 'duration']
-      });
-    });
+document.addEventListener('DOMContentLoaded', function() {
+  const player = new Plyr('.plyr', {
+    controls: ['play', 'progress', 'duration']
+  });
+
+  // Obtém o elemento que exibe o tempo decorrido
+  const currentTimeElement = player.elements.currentTime;
+
+  // Obtém a duração total do áudio
+  const duration = player.duration;
+
+  // Função para atualizar o tempo decorrido invertido
+  function updateReverseCurrentTime() {
+    // Calcula o tempo decorrido invertido
+    const reverseCurrentTime = duration - player.currentTime;
+
+    // Atualiza o elemento com o tempo decorrido invertido
+    currentTimeElement.textContent = formatTime(reverseCurrentTime);
+  }
+
+  // Formata o tempo no formato '00:00'
+  function formatTime(time) {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  }
+
+  // Adiciona um evento de atualização do tempo decorrido
+  player.on('timeupdate', updateReverseCurrentTime);
+});
+
   </script>
 </body>
 </html>
