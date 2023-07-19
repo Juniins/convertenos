@@ -97,26 +97,21 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const player = new Plyr('.plyr', {
-        controls: ['play', 'progress', 'current-time'],
-        displayDuration: false,
+        controls: ['play', 'progress', 'current-time', 'duration']
       });
 
+      const { currentTimeContainer, durationContainer } = player.elements;
+      currentTimeContainer.style.display = 'none';
+      durationContainer.style.display = 'inline-block';
+
       player.on('play', function(event) {
-        const { currentTimeContainer, durationContainer } = player.elements;
         currentTimeContainer.style.display = 'inline-block';
         durationContainer.style.display = 'none';
       });
 
       player.on('pause', function(event) {
-        const { currentTimeContainer, durationContainer } = player.elements;
-        currentTimeContainer.style.display = 'inline-block';
-        durationContainer.style.display = 'none';
-      });
-
-      player.on('stop', function(event) {
-        const { currentTimeContainer, durationContainer } = player.elements;
-        currentTimeContainer.style.display = 'inline-block';
-        durationContainer.style.display = 'none';
+        currentTimeContainer.style.display = 'none';
+        durationContainer.style.display = 'inline-block';
       });
     });
   </script>
