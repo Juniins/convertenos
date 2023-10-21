@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de Notificações</title>
+    <style>
+        body {
+            background-color: rgba(0, 0, 0, 5);
+        } </style>
+
+        <style>
+
+        /* Estilo base das notificações */
+        .notification {
+            width: 280px; /* Largura ajustada para 280px */
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: #fff;
+            color: #363636;
+            line-height: 1.3;
+            will-change: transform;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.05);
+            max-width: 350px; /* Mantenha o máximo de 350px se necessário */
+            pointer-events: auto;
+            padding: 8px 10px;
+            border-radius: 8px;
+            animation: slideIn 0.35s cubic-bezier(0.21, 1.02, 0.73, 1) 0s 1 normal forwards;
+            margin: 0 auto; /* Centralizar horizontalmente */
+            margin-bottom: 5px; /* Espaço vertical entre notificações */
+        }
+
+        /* Animação de entrada das notificações */
+        @keyframes slideIn {
+            0% {
+                transform: translate3d(0, -100%, 0) scale(0.6);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translate3d(0, 0, 0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Animação de saída das notificações */
+        @keyframes slideOut {
+            0% {
+                transform: translate3d(0, 0, 0) scale(1);
+                opacity: 1;
+                z-index: 0; /* Define a ordem de sobreposição durante a saída */
+            }
+            100% {
+                transform: translate3d(0, -100%, 0) scale(0.6);
+                opacity: 0;
+                z-index: 0; /* Redefine a ordem de sobreposição após a saída */
+            }
+        }
+
+        /* Ícone de check com SVG */
+        .check-icon {
+            margin-right: 8px;
+            width: 20px;
+            height: 20px; /* Tamanho inicial do ícone */
+            box-sizing: border-box;
+            border-radius: 100%;
+            transform: scale(0.6); /* Define o ícone para a escala inicial da animação */
+            transition: transform 0.3s ease-out; /* Adicionando uma transição de transformação */
+        }
+
+        /* Contêiner de notificações */
+        #notificationContainer {
+            position: fixed;
+            z-index: 9999;
+            top: 0; /* Alinhe o container ao topo */
+            left: 50%; /* Alinhe horizontalmente ao centro */
+            transform: translateX(-50%); /* Centralize horizontalmente o container */
+            display: flex;
+            flex-direction: column;
+            padding-top: 10px;
+        }
+
+        /* CSS para a nova div que envolve as notificações */
+        #notificationWrapper {
+            left: 0px;
+            right: 0px;
+            display: flex;
+            position: absolute;
+            transition: all 230ms cubic-bezier(0.21, 1.02, 0.73, 1) 0s; /* Adicionando a transição */
+            transform: translateY(0px);
+            top: 0px;
+            justify-content: flex-end;
+        }
+
+        /* Estilo da mensagem de notificação */
+        .notification-message {
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <button id="look1">Mostrar Notificação</button>
+
+    <div id="notificationContainer">
+        <div id="notificationWrapper">
+            <!-- As notificações aparecerão aqui -->
+        </div>
+    </div>
+    <div class="row g-0 lookrate" id="look1" style="gap: 10px;">
+        <div class="col btn-voto n-1 d-flex align-items-center justify-content-center">
+           <i class="bi bi-emoji-angry-fill"></i>
+        </div>
+        <div class="col btn-voto n-2 d-flex align-items-center justify-content-center">
+           <i class="bi bi-emoji-frown-fill"></i>
+       </div>
+       <div class="col btn-voto n-3 d-flex align-items-center justify-content-center">
+           <i class="bi bi-emoji-expressionless-fill"></i>
+       </div>
+       <div class="col btn-voto n-4 d-flex align-items-center justify-content-center">
+           <i class="bi bi-emoji-smile-fill"></i>
+       </div>
+       <div class="col btn-voto n-5 d-flex align-items-center justify-content-center">
+         <i class="bi bi-emoji-heart-eyes-fill"></i>
+      </div>
+    </div>
+
+    <!-- Adicione o elemento <img> para o ícone de check com o id "checkIcon" -->
+    <img id="checkIcon" src="./assets/img/ck2.png" class="check-icon" alt="Check Icon" style="display: none;" />
+
+    <script>
+
+        // Função para criar e mostrar uma nova notificação
+        function look1(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+
+            // Substituir a criação do ícone de check pelo elemento <img>
+            const checkIcon = document.getElementById('checkIcon').cloneNode(true);
+            checkIcon.style.display = 'block'; // Exibir o ícone
+            notification.appendChild(checkIcon);
+
+            // Adicione o texto da notificação
+            const text = document.createElement('div');
+            text.className = 'notification-message';
+            text.textContent = message;
+            notification.appendChild(text);
+
+            // Adicionar uma transição mais lenta
+            const notifications = document.querySelectorAll('.notification');
+            notifications.forEach((n) => {
+                n.style.transition = 'transform 1s cubic-bezier(0.21, 1.02, 0.73, 1)';
+            });
+
+            let verticalOffset = 0;
+            notifications.forEach((n) => {
+                n.style.transform = `translate3d(0, ${verticalOffset}px, 0)`;
+                verticalOffset += n.offsetHeight + 8;
+            });
+
+            const container = document.getElementById('notificationContainer');
+            container.insertBefore(notification, container.firstChild);
+
+            notification.style.transform = `translate3d(0, ${verticalOffset}px, 0)`;
+
+            notification.style.animation = 'slideIn 0.35s cubic-bezier(0.21, 1.02, 0.73, 1) 0s 1 normal forwards';
+
+            notification.addEventListener('click', () => {
+                notification.style.animation = 'slideOut 0.5s cubic-bezier(0.15, 0.69, 0.33, 1.75) 0s 1 normal forwards';
+
+                notification.addEventListener('animationend', () => {
+                    notification.remove();
+                });
+            });
+
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.5s cubic-bezier(0.15, 0.69, 0.33, 1.75) 0s 1 normal forwards';
+
+                notification.addEventListener('animationend', () => {
+                    notification.remove();
+                });
+            }, 2000);
+            
+            // Ativar a animação do ícone de check
+            setTimeout(() => {
+                checkIcon.style.transform = 'scale(1)';
+            }, 10);
+        }
+
+        document.getElementById('look1').addEventListener('click', () => {
+            look1(`Thank you for your feedback! you win $ 0.00`);
+        });
+    </script>
+</body>
+</html>
