@@ -12,6 +12,7 @@ $(document).ready(function () {
 
   // Exibe os valores nos IDs específicos
   $("#username").text(user_name);
+  $("#username2").text(user_name);
   $("#email").text(user_email);
   $("#saldo").text(user_balance);
 
