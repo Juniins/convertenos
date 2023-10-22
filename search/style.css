@@ -167,6 +167,7 @@
     left: 0; 
     right: 0; 
     border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+    z-index: 999999;
   }
 
   .selected {
@@ -527,25 +528,28 @@
 
 /*Abre CSS Notificações*/
         /* Estilo base das notificações */
-        .notification {
-          width: 300px; /* Largura ajustada para 280px */
-          position: relative;
-          display: flex;
-          align-items: center;
-          background: #fff;
-          color: #363636;
-          line-height: 1.3;
-          will-change: transform;
-          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.05);
-          max-width: 350px; /* Mantenha o máximo de 350px se necessário */
-          pointer-events: auto;
-          padding: 8px 10px;
-          border-radius: 8px;
-          animation: slideIn 0.35s cubic-bezier(0.21, 1.02, 0.73, 1) 0s 1 normal forwards;
-          margin: 0 auto; /* Centralizar horizontalmente */
-          margin-bottom: 5px; /* Espaço vertical entre notificações */
-          z-index: 99999999999;
-      }
+.notification {
+width: 300px; 
+position: relative;
+display: flex;
+align-items: center;
+background: #fff;
+color: #363636;
+line-height: 1.3;
+will-change: transform;
+box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.05);
+max-width: 350px; 
+pointer-events: auto;
+padding: 8px 10px;
+border-radius: 8px;
+animation: slideIn 0.35s cubic-bezier(0.21, 1.02, 0.73, 1) 0s 1 normal forwards;
+margin: 0 auto; 
+margin-bottom: 5px; 
+z-index: 99999999999;
+
+}
+
+      
 
       /* Animação de entrada das notificações */
       @keyframes slideIn {
@@ -587,7 +591,7 @@
       /* Contêiner de notificações */
       #notificationContainer {
           position: fixed;
-          z-index: 9999;
+          z-index: 9999999999;
           top: 0; /* Alinhe o container ao topo */
           left: 50%; /* Alinhe horizontalmente ao centro */
           transform: translateX(-50%); /* Centralize horizontalmente o container */
